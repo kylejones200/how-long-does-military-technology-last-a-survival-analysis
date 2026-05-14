@@ -1,7 +1,7 @@
 # How Long Does Military Technology Last A Survival Analysis
 
-**Published:** 2025-05-21
-**Medium:** [https://medium.com/@kyle-t-jones/how-long-does-military-technology-last-a-survival-analysis-025308994cd0](https://medium.com/@kyle-t-jones/how-long-does-military-technology-last-a-survival-analysis-025308994cd0)
+Published: 2025-05-21
+Medium: [https://medium.com/@kyle-t-jones/how-long-does-military-technology-last-a-survival-analysis-025308994cd0](https://medium.com/@kyle-t-jones/how-long-does-military-technology-last-a-survival-analysis-025308994cd0)
 
 ## About
 

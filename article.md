@@ -17,7 +17,7 @@ Each row in the dataset represents a country-year-technology observation. For ex
 I limited our analysis to rows where use == 1. This ensures we're only measuring active, meaningful deployment --- not prototypes, tests, or weapons that have been leapfrogged by more advanced systems.
 
 ### From Rows to Spells
-To turn this dataset into something usable for survival analysis, I had to identify **spells** --- continuous stretches of years when a country actively used a given technology. If France used the MAS-36 rifle from 1936 to 1962, that's a 27-year spell. If they later reintroduced it briefly during training in the 1980s, that's a separate spell.
+To turn this dataset into something usable for survival analysis, I had to identify spells --- continuous stretches of years when a country actively used a given technology. If France used the MAS-36 rifle from 1936 to 1962, that's a 27-year spell. If they later reintroduced it briefly during training in the 1980s, that's a separate spell.
 
 I grouped these consecutive years into one row per spell, noting:
 
@@ -37,7 +37,7 @@ Survival analysis tells you the probability that something will still be "alive"
 
 I used the Kaplan-Meier estimator and the Cox Proportional Hazards model.
 
-**Kaplan-Meier Estimator**
+Kaplan-Meier Estimator
 
 The Kaplan-Meier estimator builds a survival curve. For each year, it calculates the probability that a technology survives (remains in use) beyond that point. It's a step function: every time a technology is retired, the curve drops.
 
@@ -53,38 +53,38 @@ The Cox model doesn't assume a fixed lifespan or decay pattern. It lets the data
 
 With these tools, I can now ask meaningful questions about how long weapons last, how those patterns vary by context, and what they tell us about military procurement and planning.
 
-**U.S. Technology Turnover Over Time**
+U.S. Technology Turnover Over Time
 
 Does the United States replace its military equipment faster now than it did a century ago?
 
-To find out, I divided the U.S. military technology data into **four 50-year periods**:
+To find out, I divided the U.S. military technology data into four 50-year periods:
 
 - 1823--1873
 - 1873--1923
 - 1923--1973
 - 1973--2023
 
-Each spell of technology use was labeled by its start year and assigned to the correct historical window. Then I plotted **Kaplan-Meier survival curves** for each era and used **log-rank tests** to compare them.
+Each spell of technology use was labeled by its start year and assigned to the correct historical window. Then I plotted Kaplan-Meier survival curves for each era and used log-rank tests to compare them.
 
 The results show a clear shift in how long U.S. equipment stays in service.
 
 ### Survival Is Getting Shorter
-Technologies introduced after **1973** have significantly shorter lifespans than those introduced earlier. They are more likely to be retired within 10--20 years. In contrast, technologies introduced before 1923 often lasted 40 years or more.
+Technologies introduced after 1973 have significantly shorter lifespans than those introduced earlier. They are more likely to be retired within 10--20 years. In contrast, technologies introduced before 1923 often lasted 40 years or more.
 
-The log-rank tests between these time periods confirmed that these differences are **statistically significant**:
+The log-rank tests between these time periods confirmed that these differences are statistically significant:
 
-- 1823--1873 vs. 1973--2023: **p \< 0.05**
-- 1923--1973 vs. 1973--2023: **p \< 0.01**
-- 1873--1923 vs. 1923--1973: **p \< 0.05**
+- 1823--1873 vs. 1973--2023: p \< 0.05
+- 1923--1973 vs. 1973--2023: p \< 0.01
+- 1873--1923 vs. 1923--1973: p \< 0.05
 
 This isn't just a visual difference. It reflects a real shift in military procurement and retirement behavior.
 
 ### Why Did This Happen?
 Several factors help explain the faster turnover after the 1970s:
 
-- **Cold War competition** accelerated investment in new capabilities.
-- **Electronics and computing** became critical, aging weapons faster than mechanical wear alone.
-- **Modular upgrades** allowed for faster innovation but also made platforms easier to replace entirely.
+- Cold War competition accelerated investment in new capabilities.
+- Electronics and computing became critical, aging weapons faster than mechanical wear alone.
+- Modular upgrades allowed for faster innovation but also made platforms easier to replace entirely.
 
 This shift doesn't mean old systems were bad. It means the U.S. began moving faster, spending more, and demanding newer tech on shorter cycles.
 
@@ -93,7 +93,7 @@ Survival analysis shows that the U.S. military has shortened its technology life
 
 This pattern isn't visible from budgets or strategy documents alone. You have to track how long systems stay in use --- and that's exactly what survival analysis does.
 
-**Which Tech Lasts Longest?**
+Which Tech Lasts Longest?
 
 Not all military technologies age the same. Some fade out in a few years. Others stick around for generations. To understand these patterns, I grouped technologies into broad classes --- called techtype in the dataset --- and asked a simple question:
 
@@ -107,23 +107,23 @@ I focused on the five most common categories:
 - Machine guns
 - Artillery
 
-Using the **Kaplan-Meier estimator**, I generated survival curves for each category and used the **log-rank test** to determine whether differences were statistically meaningful.
+Using the Kaplan-Meier estimator, I generated survival curves for each category and used the log-rank test to determine whether differences were statistically meaningful.
 
 
 ### Clear Differences in Lifespan
-The results were unmistakable. Different categories show **very different survival profiles**:
+The results were unmistakable. Different categories show very different survival profiles:
 
-- **Fighter aircraft** had the shortest survival. Half were retired within 20 years.
-- **Tanks** also showed relatively short service lives.
-- **Machine guns and artilery** lasted the longest --- many surviving well past the 50-year mark.
+- Fighter aircraft had the shortest survival. Half were retired within 20 years.
+- Tanks also showed relatively short service lives.
+- Machine guns and artilery lasted the longest --- many surviving well past the 50-year mark.
 
-When I ran pairwise log-rank tests comparing the survival curves of each category, **every single test showed statistically significant differences**.
+When I ran pairwise log-rank tests comparing the survival curves of each category, every single test showed statistically significant differences.
 
 Example results:
 
-- Fighter aircraft vs Machine guns: **p \< 1e-44**
-- Tanks vs Artillery: **p \< 1e-14**
-- Small arms vs Fighter aircraft: **p \< 1e-12**
+- Fighter aircraft vs Machine guns: p \< 1e-44
+- Tanks vs Artillery: p \< 1e-14
+- Small arms vs Fighter aircraft: p \< 1e-12
 
 ### Why the Gap?
 The lifespan of a weapon isn't about how good it is. It's about how quickly the surrounding context changes.
@@ -139,7 +139,7 @@ Survival curves don't just show these differences visually. They let us test the
 
 In the next section, I take this one step further. I run a Cox regression model to compare small arms and fighter aircraft directly and estimate just how much faster one is phased out than the other.
 
-**Fighter Aircraft vs Small Arms (Cox Model)**
+Fighter Aircraft vs Small Arms (Cox Model)
 
 To quantify just how much faster fighter aircraft are retired compared to small arms, I used the Cox Proportional Hazards model. This model estimates the hazard rate --- the risk that a technology spell ends at a given moment, given that it has survived up to that point.
 
@@ -153,10 +153,10 @@ Then I fit the Cox model to these two categories only, using spell duration and 
 ### The Result
 The output was clean and statistically strong:
 
-- **Hazard ratio:** 1.75
-- **z-statistic:** 7.02
-- **p-value:** \< 0.005
-- [**95% confidence interval:** \[1.49, 2.04\]]
+- Hazard ratio: 1.75
+- z-statistic: 7.02
+- p-value: \< 0.005
+- [95% confidence interval: \[1.49, 2.04\]]
 
 This means that, at any given point in time, a fighter aircraft is about 75% more likely to be retired than a small arm, all else equal.
 
@@ -169,9 +169,9 @@ This is doctrine. This is procurement. This is politics. But it's also measurabl
 
 The Cox model makes that measurement clear. It's not enough to say fighter jets "feel" more temporary. I now know that, on average, they are.
 
-**Applications and Implications**
+Applications and Implications
 
-Once I saw that fighter aircraft retire faster than small arms, I wanted to know: **d**oes geography matter? Are the same weapons used longer in some regions than in others?
+Once I saw that fighter aircraft retire faster than small arms, I wanted to know: does geography matter? Are the same weapons used longer in some regions than in others?
 
 To find out, I isolated all the small arms spells from the dataset and grouped them by continent: Africa, Asia, Europe, the Americas, and the Middle East. Then I built Kaplan-Meier survival curves for each region.
 
@@ -190,7 +190,7 @@ The result is that the same technology has a very different lifespan depending o
 ### What Survival Analysis Offers
 This approach gives us a new lens on military history and capability.
 
-We're not measuring firepower, lethality, or cost. We're measuring **persistence** --- the length of time that technology shapes military behavior and planning. And we're doing it with tools that account for censoring, context, and comparison.
+We're not measuring firepower, lethality, or cost. We're measuring persistence --- the length of time that technology shapes military behavior and planning. And we're doing it with tools that account for censoring, context, and comparison.
 
 Survival analysis reveals what's usually hidden:
 
