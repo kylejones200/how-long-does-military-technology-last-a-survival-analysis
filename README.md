@@ -11,14 +11,7 @@ Each row in the dataset represents a country-year-technology observation. For ex
 
 I limited our analysis to rows where use == 1. This ensures we're only measuring active, meaningful deployment --- not prototypes, tests, or weapons that have been leapfrogged by more advanced systems.
 
-## About
 
-Place the code for this article in this repository.
-The original article export is saved as `article.md`.
-
-## Files
-
-Add your `.ipynb`, `.py`, `.yaml`, `.js`, `.ts`, or other project files here.
 
 ## Disclaimer
 
